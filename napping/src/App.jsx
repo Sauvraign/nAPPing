@@ -15,18 +15,20 @@ function App() {
           <div className="notification">
             <img className="ringBell" src={ringBellImg} alt="icône de notification activé"></img>
             <img className="badge" src={badgeImg} alt="icône de notification activé"></img>
-            <span className="badge" src={badgeImg}>3</span>
-            <img className="bell" src={bellImg} alt="icône de notification activé"></img>
+            {/* <span className="badge" src={badgeImg}>3</span> */}
+            {/* <img className="bell" src={bellImg} alt="icône de notification désactivé"></img> */}
             <img className="switch" src={switchImg} alt="icône de notification activé"></img>
           </div>
         </nav>
       </header>
+      <div className="label">
+        <label className="H" htmlFor="H">H</label>
+      </div>
       <div className="menuInput">
-        <label htmlFor="H">H</label>
-        <input className="input" type="text" placeholder='Hour' name="H" />
+        <input id="inputHour" className="input" type="text" placeholder='Hour' name="H" />
         <p>:</p>
-        <label htmlFor="M">M</label>
-        <input className="input" type="text" placeholder='Minute' name="M" />
+        <label className="M" htmlFor="M">M</label>
+        <input id="inputMinute" className="input" type="text" placeholder='Minute' name="M" />
       </div>
       {/* <div className="menuInput">
         <div className="inputHour">H

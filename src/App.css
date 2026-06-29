@@ -1,0 +1,238 @@
+/* GOBAL BODY */
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* BARRE DE NAVIGATION */
+
+.notification {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  padding-top: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+}
+
+.bell {
+  width:30px;
+  height:30px;
+  padding-left: 20px;
+}
+
+.bell:hover {
+  width:35px;
+  height:35px;
+  padding-left: 17px;
+  cursor: pointer;
+}
+
+.ringBell {
+  width:30px;
+  height:30px;
+  padding-left: 20px;
+}
+
+.ringBell:hover {
+  width:35px;
+  height:35px;
+  padding-left: 17px;
+  cursor: pointer;
+}
+
+.notification p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 36px;
+  text-align: center;
+}
+
+/* .badge {
+  background-color: red;
+  border: 0.5px solid rgb(255, 255, 255);
+  border-radius: 50%;
+  color: white;
+  width:10px;
+  height:10px;
+} */
+
+.switch {
+  width:30px;
+  height:30px;
+  padding-left: 80px;
+}
+
+.switch:hover {
+  width:35px;
+  height:35px;
+  padding-left: 77px;
+  cursor: pointer;
+}
+
+/* CLOCK TIMER */
+
+.clock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(193, 193, 193);
+  border-color: black;
+  border-style: solid;
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+}
+
+.title {
+  text-align: center;
+  font-family: "Technology";
+  font-size: 24px;
+  margin: 0;
+}
+
+.timer {
+  font-size: 58px;
+  font-family: "Technology";
+  padding-bottom: 20px;
+  margin: 0;
+}
+
+/* MENU IMPUT */
+
+.menuInput {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+
+.label {
+  font-family: "Technology";
+  font-size: 24px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+}
+
+.input {
+  justify-self: center; /* Centre horizontalement */
+  align-self: center;   /* Centre verticalement */
+  text-align: center;
+  font-family: "Technology";
+  font-size: 24px;
+  border: 2px solid rgb(80, 80, 80);
+  border-radius: 5px;
+  width: 60px;
+  height: 40px;
+}
+
+.input::placeholder {
+  color: rgb(208, 208, 208);
+  font-family: "Technology";
+  font-size: 3em;
+  position: absolute;
+  left: 13px;
+  bottom: -20px; /* Décalage sous l'input */
+}
+
+/* MENU TIMER */
+
+.menuTimer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 1rem;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+}
+
+.selectTimer {
+  justify-self: center; /* Centre horizontalement */
+  align-self: center;   /* Centre verticalement */
+  font-family: "Technology";
+  font-size: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+}
+
+.selectTimer:hover {
+  background-color: rgb(78, 78, 78);
+  color: white;
+  width: 65px;
+  height: 65px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+/* BOUTONS */
+
+.menuButton {
+  display: grid;
+  gap: 5px;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+}
+
+.button {
+  background-color: rgb(188, 204, 255);
+  border-radius: 5px;
+  border-color: black;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  padding-top: 5px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+}
+
+.button:hover {
+  background-color: rgb(60, 80, 150);
+  color: white;
+  border-radius: 5px;
+  border-color: rgb(115, 188, 228);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.launch {
+  display: flex;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+}
+
+.butonLaunch {
+  display: grid;
+  background-color: rgb(4, 167, 4);
+  border-radius: 50px;
+  font-size: 24px;
+  color: white;
+  text-transform: uppercase;
+  width: 150px;
+  padding-top: 5px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+}
+
+.butonLaunch:hover {
+  background-color: rgb(4, 108, 4);
+  color: white;
+  border-radius: 50px;
+  border-color: rgb(0, 0, 0);
+  font-size: 28px;
+  cursor: pointer;
+}

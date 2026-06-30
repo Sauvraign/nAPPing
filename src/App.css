@@ -206,15 +206,16 @@
   cursor: pointer;
 }
 
-.launch {
+.launchButton {
   display: flex;
+  grid-template-columns: 1fr 1fr;
   padding-top: 20px;
   padding-right: 20px;
   padding-bottom: 20px;
   padding-left: 20px;
 }
 
-.butonLaunch {
+.buttonLaunch {
   display: grid;
   background-color: rgb(4, 167, 4);
   border-radius: 50px;
@@ -228,8 +229,54 @@
   padding-left: 5px;
 }
 
-.butonLaunch:hover {
+.buttonLaunch:hover {
   background-color: rgb(4, 108, 4);
+  color: white;
+  border-radius: 50px;
+  border-color: rgb(0, 0, 0);
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.buttonStop {
+  display: grid;
+  background-color: rgb(167, 4, 4);
+  border-radius: 50px;
+  font-size: 24px;
+  color: white;
+  text-transform: uppercase;
+  width: 150px;
+  padding-top: 5px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+}
+
+.buttonStop:hover {
+  background-color: rgb(108, 4, 4);
+  color: white;
+  border-radius: 50px;
+  border-color: rgb(0, 0, 0);
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.buttonReset {
+  display: grid;
+  background-color: rgb(4, 156, 167);
+  border-radius: 50px;
+  font-size: 24px;
+  color: white;
+  text-transform: uppercase;
+  width: 150px;
+  padding-top: 5px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+}
+
+.buttonReset:hover {
+  background-color: rgb(4, 58, 108);
   color: white;
   border-radius: 50px;
   border-color: rgb(0, 0, 0);

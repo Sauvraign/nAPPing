@@ -1,34 +1,58 @@
-import { useState , useEffect , useRef} from 'react'
+import { useState, useEffect, useRef } from 'react'
 import ringBellImg from './assets/ring-bell.svg'
 import badgeImg from './assets/badge.svg'
 import bellImg from './assets/bell.svg'
 import switchImg from './assets/switch.svg'
+import alarm from './sounds/alarm1.mp3'
 import './App.css'
 
 function App() {
+  const [totalSeconds, setTotalSeconds] = useState(0);
   const [isRunning, setRunning] = useState(false);
-  const [elapsedTime, setElaspedTime] = useState(0);
-  const intervalIdRef = useRef(null);
-  const startTimeRef = useRef(0);
+  const intervalRef = useRef(null);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  const audioRef = useRef(new Audio(alarm));
 
-  useEffect(() => {
+  function start() {
+    if (intervalRef.current || totalSeconds === 0) return;
+    setRunning(true);
 
-  }, {isRunning});
+    intervalRef.current = setInterval(() => {
+      setTotalSeconds((prev) => {
+        if (prev <= 1) {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+          setRunning(false);
+          audioRef.current.play();
+          audioRef.current.loop = true;
+          return 0;
+        }
 
-  function start(){
+        return prev - 1;
+      });
+    }, 1000);
+  }
+
+  function stop() {
+    setRunning(false);
+
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
     
   }
 
-  function stop(){
-
+  function reset() {
+    setRunning(false);
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
+    setTotalSeconds(0);
+    audioRef.current.pause();
   }
 
-  function reset(){
-
-  }
-
-  function formatTime(){
-
+  function addSeconds(nbrSeconds) {
+    let previousTime = totalSeconds
+    setTotalSeconds(previousTime + nbrSeconds);
   }
 
   return (
@@ -45,10 +69,11 @@ function App() {
         </nav>
       </header>
       <main className="main">
+        <audio src="./sounds/alarm1.mp3"></audio>
         <div className="clock">
           <div>
             <p className="title">timer</p>
-            <p className="timer">{isRunning} : 00</p>
+            <p className="timer">{String(minutes).padStart(2, "0")} : {String(seconds).padStart(2, "0")}</p>
           </div>
         </div>
         <div className="menuInput">
@@ -58,20 +83,27 @@ function App() {
           <input className="input" type="number" placeholder='--' min="0" max="59" name="M" />
         </div>
         <div className="menuTimer">
-          <button className="selectTimer">10</button>
-          <button className="selectTimer">20</button>
-          <button className="selectTimer">30</button>
-          <button className="selectTimer">40</button>
-          <button className="selectTimer">50</button>
-          <button className="selectTimer">60</button>
+          <button onClick={() => addSeconds(1 * 10)} className="selectTimer">10</button>
+          <button onClick={() => addSeconds(20 * 60)} className="selectTimer">20</button>
+          <button onClick={() => addSeconds(30 * 60)} className="selectTimer">30</button>
+          <button onClick={() => addSeconds(40 * 60)} className="selectTimer">40</button>
+          <button onClick={() => addSeconds(50 * 60)} className="selectTimer">50</button>
+          <button onClick={() => addSeconds(60 * 60)} className="selectTimer">60</button>
         </div>
         <div className="menuButton">
           <button className="button">import sound</button>
           <button className="button">save alarm</button>
         </div>
-        <div className="launch">
-          <button className="butonLaunch" onClick={start}>start</button>
-        </div>
+        {isRunning ?
+          <div className="stop">
+            <button className="buttonStop" onClick={stop}>stop</button>
+          </div>
+          :
+          <div className="launchButton">
+            <button className="buttonLaunch" onClick={start}>start</button>
+            <button className="buttonReset" onClick={reset}>reset</button>
+          </div>
+        }
       </main>
     </>
   )

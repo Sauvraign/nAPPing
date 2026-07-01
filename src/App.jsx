@@ -3,16 +3,44 @@ import ringBellImg from './assets/ring-bell.svg'
 import badgeImg from './assets/badge.svg'
 import bellImg from './assets/bell.svg'
 import switchImg from './assets/switch.svg'
+import verified from './assets/verified.svg'
 import alarm from './sounds/alarm1.mp3'
 import './App.css'
 
 function App() {
+
+  // INPUT MENU
+
+  const [lim, setlim] = useState({
+    H: "",
+    M: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (value === "") {
+      setlim({ ...lim, [name]: "" });
+      return;
+    }
+
+    const max = name === "H" ? 23 : 59;
+
+    setlim({
+      ...lim,
+      [name]: Math.min(Number(value), max),
+    });
+  };
+
+  //FONCTION TIMER + BUTTON LAUNCHER
+
   const [totalSeconds, setTotalSeconds] = useState(0);
   const [isRunning, setRunning] = useState(false);
   const intervalRef = useRef(null);
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
   const audioRef = useRef(new Audio(alarm));
+  const [time, setTime] = useState("")
 
   function start() {
     if (intervalRef.current || totalSeconds === 0) return;
@@ -39,7 +67,7 @@ function App() {
 
     clearInterval(intervalRef.current);
     intervalRef.current = null;
-    
+
   }
 
   function reset() {
@@ -51,8 +79,47 @@ function App() {
   }
 
   function addSeconds(nbrSeconds) {
-    let previousTime = totalSeconds
-    setTotalSeconds(previousTime + nbrSeconds);
+    // let previousTime = totalSeconds
+    setTotalSeconds(nbrSeconds);
+  }
+
+  // FONCTION NOTIF
+
+  /**
+ * Fonction à utiliser pour demander à l'utilisateur s'il souhaite activer les notifications
+ */
+  async function requestNotificationPermission() {
+    if (!('Notification' in window)) {
+      return false;
+    }
+
+    if (Notification.permission === 'granted') {
+      return true;
+    }
+
+    const permission = await Notification.requestPermission();
+    return permission === 'granted';
+  }
+
+  /**
+   * Envoie une notification
+   */
+  function sendNotification(title, body) {
+    if (Notification.permission === 'granted') {
+      new Notification(title, { body, icon: '/icon.png' });
+    }
+  }
+
+  // itilisation au moment du rappel
+  sendNotification('nAPPing', 'Votre sieste commence dans 10 minutes.');
+  // et à la fin
+  sendNotification('nAPPing', 'Réveil ! Bonne reprise.');
+
+  // SAVE ALARM
+
+  function saveAlarm() {
+    localStorage.setItem("alarm", `${lim.H} : ${lim.M}`);
+    alert("alarme enregistré")
   }
 
   return (
@@ -79,8 +146,13 @@ function App() {
         <div className="menuInput">
           <label className="label">HOUR</label>
           <label className="label">MINUTE</label>
-          <input className="input" type="number" placeholder='--' min="0" max="23" name="H" />
-          <input className="input" type="number" placeholder='--' min="0" max="59" name="M" />
+          <input className="input" type="number" placeholder="--" min="0" max="23" name="H" value={lim.H} onChange={handleChange} />
+          <input className="input" type="number" placeholder="--" min="0" max="59" name="M" value={lim.M} onChange={handleChange} />
+        </div>
+        <div className="popUp">
+          <p className="alarmSaved">Alarm Saved 
+            <img className="verified" src={verified} alt="icône de vérification pop-up"></img>
+          </p>
         </div>
         <div className="menuTimer">
           <button onClick={() => addSeconds(1 * 10)} className="selectTimer">10</button>
@@ -92,7 +164,7 @@ function App() {
         </div>
         <div className="menuButton">
           <button className="button">import sound</button>
-          <button className="button">save alarm</button>
+          <button className="button" onClick={saveAlarm}>save alarm</button>
         </div>
         {isRunning ?
           <div className="stop">
